@@ -9,11 +9,11 @@ CLocalSystem::CLocalSystem() : mqtt(), ss(SWITCH_SENSOR_PIN) , ir(INFRARED_SENSO
     ss_sensor = 1;
     new_points = 0;
     client_points = 0;
-    client_id = 2;
+    //client_id = 2;
     active_com = false;
     send_ready = 0;
 
-    //mqtt.init();
+    mqtt.init();
     ss.setStatus(1);
     ir.setStatus(0);
     ws.setStatus(0);
@@ -119,7 +119,8 @@ void *CLocalSystem::weight_acquisition(void *arg){
     CLocalSystem *obj = static_cast<CLocalSystem*>(arg);
     while(1){
         pthread_mutex_lock(&obj->mutWeightAcquisition);
-            if(obj->active_com == false){//
+            if(obj->active_com == false && obj->mqtt.receiveMessage()){//
+                obj->client_id = obj->mqtt.getClientID();
                 obj->active_com = true;
                 obj->client_points = obj->db.getClientPoints(obj->client_id);
                 printf("ID:%d OLD POINTS: %d\n",obj->client_id,obj->client_points);      
