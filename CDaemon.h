@@ -1,21 +1,17 @@
 #ifndef CHWDAEMON_H
 #define CHWDAEMON_H
 
-#include  <sys/syslog.h>
+#include <sys/syslog.h>
 #include <sys/types.h> 
 #include <sys/stat.h>
-#include <unistd.h> 
-#include <stdlib.h>
-#include <string.h>
 #include <iostream> 
-#include <fcntl.h>
-#include <time.h>
 #include <signal.h>
 #include <mqueue.h>
 #include <gpiod.h>
-#include <chrono>
 #include "CDebounce.h"
 
+#define INFRARED_SENSOR_PIN 22
+#define SWITCH_SENSOR_PIN 16
 #define MSGQOBJ_NAME    "/msgqSensors"
 #define MAX_MSG_LEN     70
 

@@ -10,8 +10,8 @@ bool CDebounce::debounce() {
 
     if (elapsedTime >= debounce_time) {
         last_trigger = currentTime;
-        return true;  // Trigger is debounced
+        return true;  
     }
 
-    return false;  // Trigger is not debounced yet
+    return false;  
 }

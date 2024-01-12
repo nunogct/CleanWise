@@ -33,11 +33,5 @@ void CDigitalSensor::setStatus(bool status){
 
 bool CDigitalSensor::getStatus(){
     return status;
-}
 
-/*int main(){
-    CDigitalSensor ir(22);
-    CDigitalSensor ss(16);
-    ir.read();
-    ss.read();
-}*/
+}

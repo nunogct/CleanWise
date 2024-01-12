@@ -9,7 +9,6 @@ CLocalSystem::CLocalSystem() : mqtt(), ss(SWITCH_SENSOR_PIN) , ir(INFRARED_SENSO
     ss_sensor = 1;
     new_points = 0;
     client_points = 0;
-    //client_id = 2;
     active_com = false;
     send_ready = 0;
 
@@ -170,14 +169,7 @@ void *CLocalSystem::send_data(void *arg){
 
 void *CLocalSystem::full_dumpster(void *arg){
    CLocalSystem *obj = static_cast<CLocalSystem*>(arg);
-   
-    /*if(obj->ir_sensor == 0 && obj->ir.getStatus())
-        {
-            std::cout << "Ecoponto vazio" << std::endl;
-            obj->db.setContainerState(0);
-        }*/
-
-
+    
     while(1)
     {     
         pthread_mutex_lock(&obj->mutUpdateFlags);

@@ -2,12 +2,8 @@
 
 CLed::CLed(){
 
-    //system("insmod led.ko");
-    fd0 = open("/dev/led0", O_WRONLY);
-    //system("lsmod");
-    system("echo none >/sys/class/leds/led0/trigger");
+    fd0 = open("/dev/led0", O_WRONLY); //Verificar mais tarde
 }
-//    system("insmod led.ko");
 
 CLed::~CLed(){
     close(fd0);

@@ -1,26 +1,6 @@
 #include "CDatabase.h"
 
 CDatabase::CDatabase(){
- /////////////////////////////////////////////////////////////////////////////////////// 
-    /*int vc;    
-    my_ssh_session = ssh_new();
-        if(my_ssh_session == nullptr){
-            throw std::runtime_error("Error initializing SSH session.");
-        }
-    ssh_options_set(my_ssh_session, SSH_OPTIONS_HOST, host.c_str());
-    ssh_options_set(my_ssh_session, SSH_OPTIONS_USER, user.c_str());
-
-    vc = ssh_connect(my_ssh_session);
-        if(vc != SSH_OK){
-            std::cerr << "Error: Connecting to the SSH server.\n" << std::endl;
-        }
-
-    vc = ssh_userauth_password(my_ssh_session, nullptr, password.c_str());
-        if(vc != SSH_AUTH_SUCCESS){
-            std::cerr << "Error: Password authentication failed.\n" << std::endl;
-        }*/
-///////////////////////////////////////////////////////////////////////////////////////
-
     std::cout << "CDatabase Object created with success!" << std::endl;
 }
 
@@ -84,8 +64,8 @@ int CDatabase::closeChannel(){
 }
 
 int CDatabase::getClientPoints(int client_id){
-    char buf[16];  
     int vc;
+    char buf[16];  
     //mqtt.startConnect();
     openChannel();
     std::string command = mysql_access + " -e \"SELECT PONTOS FROM Clientes WHERE CLIENTE_ID = " + std::to_string(client_id) + ";\"";
@@ -139,16 +119,3 @@ int CDatabase::setClientPoints(int client_id,int points){
     closeChannel();
     return 0;
 }
-
-/*int main(){   
-    CDatabase db;
-    db.initConnection();
-    //while(!m.receiveMessage()){}
-    int id = 20;
-    printf("%d\n",id);
-    int pontos = db.getClientPoints(id);
-    printf("PONTOS: %d\n",pontos);
-    pontos = pontos + 100;
-    db.setClientPoints(id,pontos);
-    //db.closeConnection();
-}*/

@@ -32,20 +32,16 @@ void CDaemon::run(){
 signal(SIGHUP,signalHandler); /* catch hangup signal */
 signal(SIGTERM,signalHandler); /* catch kill signal */
 
-	int ss_pin = 16;//
-	int ir_pin = 22;//
 	int old_ir_val = 0;
 	int old_ss_val = 0;
 
 	unsigned int msgprio = 1;
-	//msgqSensors = mq_open(MSGQOBJ_NAME, O_WRONLY | O_CREAT , S_IRWXU | S_IRWXG, NULL);
 	msgqSensors = mq_open(MSGQOBJ_NAME, O_WRONLY, S_IRWXU | S_IRWXG, NULL);
 	char buf[MAX_MSG_LEN + 1];
 	while (true) {
-	//std::cout << "Running" << std::endl;
+	
 	ir_val = gpiod_line_get_value(sensor_ir);
 	ss_val = gpiod_line_get_value(sensor_switch);
-	//snprintf(buf, MAX_MSG_LEN,"%d %d",ir_val,ss_val);
 
  		if (dbc.debounce()){
             ir_val = gpiod_line_get_value(sensor_ir);
