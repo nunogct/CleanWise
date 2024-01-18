@@ -55,17 +55,12 @@ ssize_t led_device_write(struct file *pfile, const char __user *pbuff, size_t le
 		SetGPIOOutputValue(pdev, LedGpioPinRed, 1);
 		SetGPIOOutputValue(pdev, LedGpioPinGreen, 1);
 	}else{
-		SetGPIOOutputValue(pdev, LedGpioPinRed, 0);
 		SetGPIOOutputValue(pdev, LedGpioPinGreen, 0);
+		SetGPIOOutputValue(pdev, LedGpioPinRed, 0);
 	}
 	
 	
 	return len;
-}
-
-ssize_t led_device_read(struct file *pfile, char __user *p_buff,size_t len, loff_t *poffset){
-	pr_alert("%s: called (%u)\n",__FUNCTION__,len);
-	return 0;
 }
 
 int led_device_close(struct inode *p_inode, struct file * pfile){
@@ -89,7 +84,6 @@ int led_device_open(struct inode* p_indode, struct file *p_file){
 static struct file_operations ledDevice_fops = {
 	.owner = THIS_MODULE,
 	.write = led_device_write,
-	.read = led_device_read,
 	.release = led_device_close,
 	.open = led_device_open,
 };
@@ -146,7 +140,6 @@ static void __exit ledModule_exit(void) {
 	device_destroy(ledDevice_class, ledDevice_majorminor);
 	class_destroy(ledDevice_class);
 	unregister_chrdev_region(ledDevice_majorminor, 1);
-	printk("ADEUS - DEVICE");
 }
 
 module_init(ledModule_init);
